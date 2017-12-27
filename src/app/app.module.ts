@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { ActiveScreenComponent } from './active-screen/active-screen.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ActiveScreenComponent
   ],
   imports: [
     BrowserModule
