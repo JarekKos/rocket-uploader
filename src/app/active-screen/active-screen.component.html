@@ -8,7 +8,7 @@
     <a (click)="onDeleteClick()">
       <mat-icon>delete</mat-icon>
     </a>
-    <a [href]="serverAddress + '' + activeImage.relative_path_to_thumbnail" [download]="activeImage.original_name">
+    <a [href]="serverAddress + '' + activeImage.relative_path_to_original_image" [download]="activeImage.original_name">
       <mat-icon>file_download</mat-icon>
     </a>
   </div>
