@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { ActiveScreenComponent } from './active-screen/active-screen.component';
@@ -16,8 +16,12 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatIconModule,
   ],
-  providers: [ImageLoaderService],
+  providers: [
+    ImageLoaderService,
+    { provide: 'Window', useValue: window },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
