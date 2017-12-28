@@ -1,3 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-active-screen></app-active-screen>
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation" [ngClass]="{'active': activeItem === 1}" (click)="onMenuItemClick(1)"><a>Active</a></li>
+  <li role="presentation" [ngClass]="{'active': activeItem === 2}" (click)="onMenuItemClick(2)"><a>Deleted</a></li>
+  <li role="presentation" [ngClass]="{'active': activeItem === 3}" (click)="onMenuItemClick(3)"><a>Upload</a></li>
+</ul>
+<app-active-screen *ngIf="activeItem === 1"></app-active-screen>
 
