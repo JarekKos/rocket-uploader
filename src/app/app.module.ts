@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ActiveScreenComponent } from './active-screen/active-screen.component';
+import { ImageLoaderService } from './image-loader.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,9 +14,10 @@ import { ActiveScreenComponent } from './active-screen/active-screen.component';
     ActiveScreenComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [ImageLoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
