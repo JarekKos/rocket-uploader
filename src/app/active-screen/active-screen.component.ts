@@ -4,6 +4,7 @@ import { ImageLoaderService } from '../image-loader.service';
 import { ImageInterface } from '../interfaces/image-interface';
 import { SERVER_ADDRESS } from '../config';
 import { GetImagesResponseInterface } from '../interfaces/get-images-response-interface';
+import { ChangeImageResponseInterface } from '../interfaces/change-image-response-interface';
 
 @Component({
   selector: 'app-active-screen',
@@ -26,8 +27,8 @@ export class ActiveScreenComponent implements OnInit {
 
   onDeleteClick() {
     this.imageLoaderService.changeImageStatus(this.activeImage.id,true, this.activeImage.original_name).subscribe(
-      (serverResponse) => {
-         this.images = this.images.filter(image => image.id !== serverResponse['data'].uploaded_image.id);
+      (serverResponse: ChangeImageResponseInterface) => {
+         this.images = this.images.filter(image => image.id !== serverResponse.data.uploaded_image.id);
       },
       err => console.log(err)
     );
