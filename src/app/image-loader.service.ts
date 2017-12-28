@@ -29,7 +29,7 @@ export class ImageLoaderService {
       original_name: name,
       image: encodedImg.split(',')[1],
     };
-    console.log('img', data.image);
+
     return this.http.post(`${SERVER_ADDRESS}/api/v1/uploaded-images`, data);
   }
 

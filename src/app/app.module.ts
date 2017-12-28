@@ -8,6 +8,7 @@ import { ImageLoaderService } from './image-loader.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteScreenComponent } from './delete-screen/delete-screen.component';
 import { UploadScreenComponent } from './upload-screen/upload-screen.component';
+import { CacheService } from './cache.service';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { UploadScreenComponent } from './upload-screen/upload-screen.component';
   ],
   providers: [
     ImageLoaderService,
+    CacheService,
     { provide: 'Window', useValue: window },
   ],
   bootstrap: [AppComponent]
