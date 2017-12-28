@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+
 import { ImageLoaderService } from '../image-loader.service';
+import { ImageInterface } from '../interfaces/image-interface';
+import { SERVER_ADDRESS } from '../config';
+import { GetImagesResponseInterface } from '../interfaces/get-images-response-interface';
 
 @Component({
   selector: 'app-active-screen',
@@ -8,10 +12,24 @@ import { ImageLoaderService } from '../image-loader.service';
 })
 export class ActiveScreenComponent implements OnInit {
 
-  constructor(private imageLoaderService: ImageLoaderService) { }
+  images: Array<ImageInterface> = [];
+  activeImage: ImageInterface;
+  serverAddress = SERVER_ADDRESS;
+
+  constructor(private imageLoaderService: ImageLoaderService, @Inject('Window') private window: Window) { }
 
   ngOnInit() {
-    this.imageLoaderService.getImages().subscribe(data => console.log(data));
+    this.imageLoaderService.getImages().subscribe((serverData: GetImagesResponseInterface) => {
+      this.images = serverData.data.uploaded_images;
+    });
   }
 
+  onDeleteClick() {
+    this.imageLoaderService.changeImageStatus(this.activeImage.id,true, this.activeImage.original_name).subscribe(
+      (serverResponse) => {
+         this.images = this.images.filter(image => image.id !== serverResponse['data'].uploaded_image.id);
+      },
+      err => console.log(err)
+    );
+  }
 }
