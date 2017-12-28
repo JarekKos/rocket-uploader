@@ -24,4 +24,13 @@ export class ImageLoaderService {
     return this.http.put(`${SERVER_ADDRESS}/api/v1/uploaded-images/${id}`, data);
   }
 
+  uploadImage(name: string, encodedImg: string) {
+    const data = {
+      original_name: name,
+      image: encodedImg.split(',')[1],
+    };
+    console.log('img', data.image);
+    return this.http.post(`${SERVER_ADDRESS}/api/v1/uploaded-images`, data);
+  }
+
 }
