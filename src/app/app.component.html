@@ -5,4 +5,5 @@
   <li role="presentation" [ngClass]="{'active': activeItem === 3}" (click)="onMenuItemClick(3)"><a>Upload</a></li>
 </ul>
 <app-active-screen *ngIf="activeItem === 1"></app-active-screen>
+<app-delete-screen *ngIf="activeItem === 2"></app-delete-screen>
 
