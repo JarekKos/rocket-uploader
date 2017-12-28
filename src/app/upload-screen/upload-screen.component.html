@@ -1,0 +1,10 @@
+<div class="upload-screen container">
+  <div class="row">
+    <button type="button" class="btn btn-warning" (click)="onChooseFileClick($event)">Choose an image</button>
+    <button type="button" class="btn btn-warning" [disabled]="!data" (click)="onUploadClick()">Upload image</button>
+    <input type="file" name="file" accept="image/*" #uploadFileField (change)="onAttachFile()">
+    <div *ngIf="data">
+      <img [src]="data" width="200" />
+    </div>
+  </div>
+</div>
