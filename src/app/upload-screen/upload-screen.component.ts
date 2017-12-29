@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { ImageLoaderService } from '../image-loader.service';
+import { CacheService } from '../cache.service';
+import { CACHE_KEY_ACTIVE_IMG } from '../config';
 
 @Component({
   selector: 'app-upload-screen',
@@ -13,7 +15,7 @@ export class UploadScreenComponent {
   file = null;
   data = null;
 
-  constructor(private imageLoaderService: ImageLoaderService) { }
+  constructor(private imageLoaderService: ImageLoaderService, private cacheService: CacheService) { }
 
   onAttachFile() {
     const fileBrowser = this.fileInput.nativeElement;
@@ -39,6 +41,7 @@ export class UploadScreenComponent {
     () => {
       this.data = null;
       this.file = null;
+      this.cacheService.clear(CACHE_KEY_ACTIVE_IMG);
     },
       err => console.log(err),
       );
