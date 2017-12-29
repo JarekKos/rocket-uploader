@@ -14,14 +14,19 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Description
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Application allows to upload, download, delete and restore images. In this case delete doesn't mean removing image from server, but changing status from 'active' to 'delete'. To decrease number of request to server, caching service was implemented.
 
-## Running end-to-end tests
+## TODO
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+1) Pagination - currently pagination is implemented on server side, but not on client side, because of that maximum number of photos is equal 20.
 
-## Further help
+2) Snack-bars - in case user call action, which require server operation, user should be informed that operation ends with success or with failure. Snack-bars are best way to do that.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+3) Progress spinners - it's the best way to inform user that action has not end yet.
+
+
+
+
+
