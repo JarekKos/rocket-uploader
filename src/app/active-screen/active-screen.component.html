@@ -1,14 +1,14 @@
-<div class="active-screen container" *ngIf="images.length > 0">
+<div class="active-screen" *ngIf="images.length > 0">
   <div class="row">
-    <div *ngFor="let img of images" [ngClass]="{'active': activeImage && activeImage.id === img.id}" (click)="activeImage = img" class="col-sm-3 img">
+    <div *ngFor="let img of images" [ngClass]="{'active': activeImage && activeImage.id === img.id}" (click)="activeImage = img" class="col-sm-4 col-md-3 img-container">
       <img [src]="serverAddress + '' + img.relative_path_to_thumbnail" />
     </div>
   </div>
-  <div *ngIf="activeImage" class="col-sm-12">
+  <div *ngIf="activeImage" class="col-sm-12 buttons-holder">
     <a (click)="onDeleteClick()">
       <mat-icon>delete</mat-icon>
     </a>
-    <a [href]="serverAddress + '' + activeImage.relative_path_to_original_image" [download]="activeImage.original_name">
+    <a class="inactive" [href]="serverAddress + '' + activeImage.relative_path_to_original_image" [download]="activeImage.original_name">
       <mat-icon>file_download</mat-icon>
     </a>
   </div>

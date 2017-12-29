@@ -1,10 +1,21 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<ul class="nav nav-pills nav-justified">
-  <li role="presentation" [ngClass]="{'active': activeItem === 1}" (click)="onMenuItemClick(1)"><a>Active</a></li>
-  <li role="presentation" [ngClass]="{'active': activeItem === 2}" (click)="onMenuItemClick(2)"><a>Deleted</a></li>
-  <li role="presentation" [ngClass]="{'active': activeItem === 3}" (click)="onMenuItemClick(3)"><a>Upload</a></li>
-</ul>
-<app-active-screen *ngIf="activeItem === 1"></app-active-screen>
-<app-delete-screen *ngIf="activeItem === 2"></app-delete-screen>
-<app-upload-screen *ngIf="activeItem === 3"></app-upload-screen>
+<div class="container">
+  <div class="nav-container">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" [ngClass]="{'active': activeItem === 1}" (click)="onMenuItemClick(1)">
+        Active
+      </button>
+      <button type="button" class="btn btn-default" [ngClass]="{'active': activeItem === 2}" (click)="onMenuItemClick(2)">
+        Deleted
+      </button>
+      <button type="button" class="btn btn-default" [ngClass]="{'active': activeItem === 3}" (click)="onMenuItemClick(3)">
+        Upload
+      </button>
+    </div>
+  </div>
+  <div [ngSwitch]="activeItem">
+    <app-active-screen *ngSwitchCase="1" ></app-active-screen>
+    <app-delete-screen *ngSwitchCase="2"></app-delete-screen>
+    <app-upload-screen *ngSwitchCase="3"></app-upload-screen>
+  </div>
+</div>
 
