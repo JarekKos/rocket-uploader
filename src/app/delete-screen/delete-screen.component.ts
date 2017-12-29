@@ -38,6 +38,7 @@ export class DeleteScreenComponent implements OnInit {
         this.images = this.images.filter(image => image.id !== serverResponse.data.uploaded_image.id);
         this.cacheService.set(CACHE_KEY_DELETE_IMG, {data: {uploaded_images: this.images}});
         this.cacheService.clear(CACHE_KEY_ACTIVE_IMG);
+        this.activeImage = null;
       },
       err => console.log(err)
     );
