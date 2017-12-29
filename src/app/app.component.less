@@ -38,8 +38,46 @@
   margin-top: 40px;
 }
 
+.header {
+  background-color: #fff;
+  height: 75px;
+  .content {
+    color: #394366;
+    font-size: 22px;
+    margin: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 30px;
+  }
+}
+
 @media (min-width: 768px) {
   .nav-container {
     text-align: right;
+  }
+  .header {
+    height: 100px;
+    .content {
+      padding-top: 60px;
+      width: 750px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .header {
+    .content {
+      width: 970px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .header {
+    height: 150px;
+    .content {
+      padding-top: 100px;
+      width: 1170px;
+    }
   }
 }
