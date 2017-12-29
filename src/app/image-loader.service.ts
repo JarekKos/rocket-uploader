@@ -6,6 +6,8 @@ import { SERVER_ADDRESS } from './config';
 @Injectable()
 export class ImageLoaderService {
 
+  downloadedImages: Array<string> = [];
+
   constructor(private http: HttpClient) { }
 
   getImages(getActiveImages: boolean = true) {

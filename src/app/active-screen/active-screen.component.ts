@@ -38,9 +38,23 @@ export class ActiveScreenComponent implements OnInit {
       (serverResponse: ChangeImageResponseInterface) => {
          this.images = this.images.filter(image => image.id !== serverResponse.data.uploaded_image.id);
          this.cacheService.set(CACHE_KEY_ACTIVE_IMG, {data: {uploaded_images: this.images}});
-        this.cacheService.clear(CACHE_KEY_DELETE_IMG);
+         this.cacheService.clear(CACHE_KEY_DELETE_IMG);
+         this.activeImage = null;
       },
       err => console.log(err)
     );
+  }
+
+  onDownloadClick(e) {
+    if (this.imageLoaderService.downloadedImages.indexOf(this.activeImage.id) === -1) {
+      this.imageLoaderService.downloadedImages.push(this.activeImage.id);
+    } else {
+      e.preventDefault();
+      console.log('Image cannot be downloaded');
+    }
+  }
+
+  wasImageDownload(): boolean {
+    return this.imageLoaderService.downloadedImages.indexOf(this.activeImage.id) > -1;
   }
 }
