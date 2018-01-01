@@ -3,7 +3,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <div class="buttons">
-    <button class="btn btn-success" (click)="confirm()">{{ confirmBtnText }}</button>
-    <button class="btn btn-danger" (click)="cancel()">{{ cancelBtnText }}</button>
+    <button *ngIf="confirmBtnText" class="btn btn-success" (click)="confirm()">{{ confirmBtnText }}</button>
+    <button class="btn" [ngClass]="closeBtnClass" (click)="close()">{{ closeBtnText }}</button>
   </div>
 </mat-dialog-actions>

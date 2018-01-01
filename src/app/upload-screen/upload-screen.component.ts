@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 import { ImageLoaderService } from '../image-loader.service';
 import { CacheService } from '../cache.service';
 import { CACHE_KEY_ACTIVE_IMG } from '../config';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-upload-screen',
@@ -12,9 +12,11 @@ import { MatDialog } from '@angular/material';
 })
 export class UploadScreenComponent {
 
+  @ViewChild('confirmationWindow') confirmationWindow: TemplateRef<any>;
   @ViewChild('uploadFileField') fileInput;
   file = null;
   data = null;
+  dialogRef: MatDialogRef<TemplateRef<any>>;
 
   constructor(
     private imageLoaderService: ImageLoaderService,
@@ -47,8 +49,13 @@ export class UploadScreenComponent {
       this.data = null;
       this.file = null;
       this.cacheService.clear(CACHE_KEY_ACTIVE_IMG);
+      this.dialogRef = this.dialog.open(this.confirmationWindow);
     },
       err => console.log(err),
       );
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

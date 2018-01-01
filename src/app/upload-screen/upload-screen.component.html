@@ -12,10 +12,9 @@
 </div>
 <ng-template #confirmationWindow>
   <app-confirmation
-    (onCancelClick)="closeDialog()"
-    (onConfirmationClick)="confirmDeletion()"
-    confirmBtnText="Delete"
-    cancelBtnText="Cancel"
-    confirmationText="Are you sure you want to delete this image?">
+    (onCloseClick)="closeDialog()"
+    closeBtnText="OK"
+    confirmationText="Image successfully uploaded. Please return to the Active page to view the image."
+    closeBtnClass="btn-success">
   </app-confirmation>
 </ng-template>

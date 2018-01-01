@@ -8,18 +8,19 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ConfirmationComponent implements OnInit {
 
   @Output() onConfirmationClick: EventEmitter<void> = new EventEmitter();
-  @Output() onCancelClick: EventEmitter<void> = new EventEmitter();
+  @Output() onCloseClick: EventEmitter<void> = new EventEmitter();
   @Input() confirmBtnText: string;
-  @Input() cancelBtnText: string;
+  @Input() closeBtnText: string;
   @Input() confirmationText: string;
+  @Input() closeBtnClass = 'btn-danger';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  cancel() {
-    this.onCancelClick.emit();
+  close() {
+    this.onCloseClick.emit();
   }
 
   confirm() {

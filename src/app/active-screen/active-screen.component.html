@@ -21,10 +21,10 @@
 </ng-template>
 <ng-template #confirmationWindow>
     <app-confirmation
-      (onCancelClick)="closeDialog()"
+      (onCloseClick)="closeDialog()"
       (onConfirmationClick)="confirmDeletion()"
       confirmBtnText="Delete"
-      cancelBtnText="Cancel"
+      closeBtnText="Cancel"
       confirmationText="Are you sure you want to delete this image?">
     </app-confirmation>
 </ng-template>
