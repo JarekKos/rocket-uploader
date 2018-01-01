@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ImageLoaderService } from '../image-loader.service';
 import { CacheService } from '../cache.service';
 import { CACHE_KEY_ACTIVE_IMG } from '../config';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-upload-screen',
@@ -15,7 +16,11 @@ export class UploadScreenComponent {
   file = null;
   data = null;
 
-  constructor(private imageLoaderService: ImageLoaderService, private cacheService: CacheService) { }
+  constructor(
+    private imageLoaderService: ImageLoaderService,
+    private cacheService: CacheService,
+    private dialog: MatDialog,
+  ) { }
 
   onAttachFile() {
     const fileBrowser = this.fileInput.nativeElement;

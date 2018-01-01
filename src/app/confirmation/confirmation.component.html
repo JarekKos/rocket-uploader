@@ -1,0 +1,9 @@
+<mat-dialog-content>
+  <div>{{ confirmationText }}</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="buttons">
+    <button class="btn btn-success" (click)="confirm()">{{ confirmBtnText }}</button>
+    <button class="btn btn-danger" (click)="cancel()">{{ cancelBtnText }}</button>
+  </div>
+</mat-dialog-actions>
