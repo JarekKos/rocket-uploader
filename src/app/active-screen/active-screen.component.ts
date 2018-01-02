@@ -49,6 +49,10 @@ export class ActiveScreenComponent implements OnInit {
         });
       });
     });
+
+    this.imageLoaderService.getImages(false).subscribe((serverData: GetImagesResponseInterface) => {
+      this.cacheService.set(CACHE_KEY_DELETE_IMG, {data: {uploaded_images: serverData.data.uploaded_images}});
+    });
   }
 
   onDeleteClick() {
@@ -85,7 +89,9 @@ export class ActiveScreenComponent implements OnInit {
       (serverResponse: ChangeImageResponseInterface) => {
          this.images = this.images.filter(image => image.id !== serverResponse.data.uploaded_image.id);
          this.cacheService.set(CACHE_KEY_ACTIVE_IMG, {data: {uploaded_images: this.images}});
-         this.cacheService.clear(CACHE_KEY_DELETE_IMG);
+         this.imageLoaderService.getImages(false).subscribe((serverData: GetImagesResponseInterface) => {
+           this.cacheService.set(CACHE_KEY_DELETE_IMG, {data: {uploaded_images: serverData.data.uploaded_images}});
+         });
          this.activeImage = null;
          this.dialogRef.close();
       },
