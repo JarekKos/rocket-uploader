@@ -7,6 +7,7 @@ import { CACHE_KEY_ACTIVE_IMG, CACHE_KEY_DELETE_IMG, SERVER_ADDRESS } from '../c
 import { ImageInterface } from '../interfaces/image-interface';
 import { GetImagesResponseInterface } from '../interfaces/get-images-response-interface';
 import { ChangeImageResponseInterface } from '../interfaces/change-image-response-interface';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-active-screen',
@@ -28,6 +29,7 @@ export class ActiveScreenComponent implements OnInit {
     private imageLoaderService: ImageLoaderService,
     private cacheService: CacheService,
     private dialog: MatDialog,
+    private sanitizer: DomSanitizer,
     @Inject('Window') private window: Window
   ) { }
 
@@ -37,6 +39,15 @@ export class ActiveScreenComponent implements OnInit {
       this.imageLoaderService.getImages()
     ).subscribe((serverData: GetImagesResponseInterface) => {
       this.images = serverData.data.uploaded_images;
+      this.images.forEach((image: ImageInterface) => {
+        this.cacheService.get(
+          image.id + '-thumbnail',
+          this.imageLoaderService.getImageThumbnail(image.id, image.original_name)
+        ).subscribe(data => {
+          const file = new File([data], image.original_name);
+          image.url = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(file));
+        });
+      });
     });
   }
 
@@ -51,7 +62,7 @@ export class ActiveScreenComponent implements OnInit {
     if (!this.downloadInProgress) {
       this.downloadInProgress = true;
       this.cacheService.get(
-        imageId,
+        imageId + '-full',
         this.imageLoaderService.getImage(imageId, imageName)
       ).subscribe(data => {
         const blob = new Blob([data], { type: 'image/*' });

@@ -22,6 +22,12 @@ export class ImageLoaderService {
     });
   }
 
+  getImageThumbnail(imageId, imageName) {
+    return this.http.get(`${SERVER_ADDRESS}/thumbnail/${imageId}/${imageName}`, {
+      responseType: 'blob'
+    });
+  }
+
   changeImageStatus(id: string, deleteImage: boolean, name: string) {
     const data = {
       status: deleteImage ? 'deleted' : 'active',
