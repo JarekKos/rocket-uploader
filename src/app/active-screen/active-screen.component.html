@@ -13,7 +13,7 @@
         <mat-icon>delete</mat-icon>
       </a>
       <a #anchor [ngClass]="{inactive: downloadInProgress}">
-        <mat-icon (click)="onDownloadClick(activeImage.id, activeImage.original_name)">
+        <mat-icon (click)="onDownloadClick(activeImage.id, activeImage.original_name, $event)">
           file_download
         </mat-icon>
       </a>
