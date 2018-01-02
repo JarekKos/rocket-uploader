@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Description
 
-Application allows to upload, download, delete and restore images. In this case delete doesn't mean removing image from server, but changing status from 'active' to 'delete'. To decrease number of request to server, caching service was implemented.
+The application allows end users to upload, download, delete and restore images. Please note, delete does not mean removing image from the server. Delete simply changes the status from 'active' to 'delete'. To decrease the number of server requests a caching service was implemented.
 
 ## TODO
 
