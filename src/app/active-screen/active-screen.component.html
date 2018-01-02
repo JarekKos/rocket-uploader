@@ -7,15 +7,17 @@
       </div>
     </div>
   </div>
-  <div *ngIf="activeImage" class="buttons-holder">
-    <a (click)="onDeleteClick()">
-      <mat-icon>delete</mat-icon>
-    </a>
-    <a #anchor [ngClass]="{inactive: downloadInProgress}">
-      <mat-icon (click)="onDownloadClick(activeImage.id, activeImage.original_name)">
-        file_download
-      </mat-icon>
-    </a>
+  <div class="row">
+    <div *ngIf="activeImage" class="buttons-holder">
+      <a (click)="onDeleteClick()">
+        <mat-icon>delete</mat-icon>
+      </a>
+      <a #anchor [ngClass]="{inactive: downloadInProgress}">
+        <mat-icon (click)="onDownloadClick(activeImage.id, activeImage.original_name)">
+          file_download
+        </mat-icon>
+      </a>
+    </div>
   </div>
 </div>
 <ng-template #noImgBlock>

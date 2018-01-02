@@ -7,10 +7,12 @@
       </div>
     </div>
   </div>
-  <div *ngIf="activeImage" class="buttons-holder">
-    <a (click)="onRestoreClick()">
-      <mat-icon>restore</mat-icon>
-    </a>
+  <div class="row">
+    <div *ngIf="activeImage" class="buttons-holder">
+      <a (click)="onRestoreClick()">
+        <mat-icon>restore</mat-icon>
+      </a>
+    </div>
   </div>
 </div>
 <ng-template #noImgBlock>
