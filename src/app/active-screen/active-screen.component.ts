@@ -54,7 +54,6 @@ export class ActiveScreenComponent implements OnInit {
         imageId,
         this.imageLoaderService.getImage(imageId, imageName)
       ).subscribe(data => {
-        console.log('download image', imageName);
         const blob = new Blob([data], { type: 'image/*' });
         const url = window.URL.createObjectURL(blob);
         this.downloadFileAnchor.nativeElement.href = url;
