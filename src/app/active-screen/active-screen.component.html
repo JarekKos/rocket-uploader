@@ -11,8 +11,10 @@
     <a (click)="onDeleteClick()">
       <mat-icon>delete</mat-icon>
     </a>
-    <a [href]="serverAddress + '' + activeImage.relative_path_to_original_image" [download]="activeImage.original_name" (click)="onDownloadClick($event)">
-      <mat-icon>file_download</mat-icon>
+    <a #anchor [ngClass]="{inactive: downloadInProgress}">
+      <mat-icon (click)="onDownloadClick(activeImage.id, activeImage.original_name)">
+        file_download
+      </mat-icon>
     </a>
   </div>
 </div>

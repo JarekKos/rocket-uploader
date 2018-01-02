@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 
 import { ImageLoaderService } from '../image-loader.service';
@@ -16,11 +16,13 @@ import { ChangeImageResponseInterface } from '../interfaces/change-image-respons
 export class ActiveScreenComponent implements OnInit {
 
   @ViewChild('confirmationWindow') confirmationWindow: TemplateRef<any>;
+  @ViewChild('anchor') downloadFileAnchor: ElementRef;
 
   images: Array<ImageInterface> = [];
   activeImage: ImageInterface;
   serverAddress = SERVER_ADDRESS;
   dialogRef: MatDialogRef<TemplateRef<any>>;
+  downloadInProgress: boolean;
 
   constructor(
     private imageLoaderService: ImageLoaderService,
@@ -44,8 +46,22 @@ export class ActiveScreenComponent implements OnInit {
     this.dialogRef = this.dialog.open(this.confirmationWindow, config);
   }
 
-  onDownloadClick() {
-    this.activeImage = null;
+  onDownloadClick(imageId, imageName) {
+    if (!this.downloadInProgress) {
+      this.downloadInProgress = true;
+      this.cacheService.get(
+        imageId,
+        this.imageLoaderService.getImage(imageId, imageName)
+      ).subscribe(data => {
+        const blob = new Blob([data], { type: 'image/*' });
+        const url = window.URL.createObjectURL(blob);
+        this.downloadFileAnchor.nativeElement.href = url;
+        this.downloadFileAnchor.nativeElement.download = imageName;
+        this.downloadFileAnchor.nativeElement.click();
+        this.downloadInProgress = false;
+        this.activeImage = null;
+      });
+    }
   }
 
   closeDialog() {
@@ -53,7 +69,7 @@ export class ActiveScreenComponent implements OnInit {
   }
 
   confirmDeletion() {
-    this.imageLoaderService.changeImageStatus(this.activeImage.id,true, this.activeImage.original_name).subscribe(
+    this.imageLoaderService.changeImageStatus(this.activeImage.id, true, this.activeImage.original_name).subscribe(
       (serverResponse: ChangeImageResponseInterface) => {
          this.images = this.images.filter(image => image.id !== serverResponse.data.uploaded_image.id);
          this.cacheService.set(CACHE_KEY_ACTIVE_IMG, {data: {uploaded_images: this.images}});

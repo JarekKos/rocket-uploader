@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { SERVER_ADDRESS } from './config';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class ImageLoaderService {
@@ -13,6 +14,12 @@ export class ImageLoaderService {
     const queryString = `status=${status}&order_by=created_at`;
 
     return this.http.get(`${SERVER_ADDRESS}/api/v1/uploaded-images?${queryString}`);
+  }
+
+  getImage(imageId, imageName) {
+    return this.http.get(`${SERVER_ADDRESS}/image/${imageId}/${imageName}`, {
+      responseType: 'blob'
+    });
   }
 
   changeImageStatus(id: string, deleteImage: boolean, name: string) {
